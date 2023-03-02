@@ -20,6 +20,8 @@ public class MemberFormServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        System.out.println("request = " + request);
+
         response.setContentType("text/html");
         response.setCharacterEncoding("utf-8");
 

@@ -39,7 +39,5 @@ public class MemberSaveServlet extends HttpServlet {
                 " <li>age="+member.getAge()+"</li>\n" + "</ul>\n" +
                 "<a href=\"/index.html\">메인</a>\n" + "</body>\n" +
                 "</html>");
-
-
     }
 }
