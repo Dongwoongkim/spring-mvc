@@ -28,7 +28,6 @@ public class FrontControllerServletV5 extends HttpServlet {
     private final Map<String, Object> handlerMappingMap = new HashMap<>();
     private final List<MyHandlerAdapter> handlerAdapters = new ArrayList<>();
 
-
     FrontControllerServletV5()
     {
         initHandlerMappingMap();
@@ -43,19 +42,22 @@ public class FrontControllerServletV5 extends HttpServlet {
 
     private void initHandlerMappingMap()
     {
+
+        //v3
         handlerMappingMap.put("/front-controller/v5/v3/members/new-form",new MemberFormControllerV3());
         handlerMappingMap.put("/front-controller/v5/v3/members/save",new MemberSaveControllerV3());
         handlerMappingMap.put("/front-controller/v5/v3/members",new MemberListControllerV3());
 
+        // v4
         handlerMappingMap.put("/front-controller/v5/v4/members/new-form",new MemberFormControllerV4());
         handlerMappingMap.put("/front-controller/v5/v4/members/save",new MemberSaveControllerV4());
         handlerMappingMap.put("/front-controller/v5/v4/members",new MemberListControllerV4());
-
     }
 
     @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        // MemberFormControllerV4
         Object handler = getHandler(request);
         if(handler==null)
         {
@@ -63,12 +65,10 @@ public class FrontControllerServletV5 extends HttpServlet {
             return;
         }
 
-        System.out.println("handler = " + handler);
         MyHandlerAdapter adapter = getHandlerAdapter(handler);
         ModelView mv = adapter.handle(request, response, handler);
 
         String viewPath = viewResolver(mv.getViewName());
-        System.out.println("viewPath = " + viewPath);
         MyView view = new MyView(viewPath);
         view.render(mv.getModel(),request,response);
     }
@@ -91,9 +91,7 @@ public class FrontControllerServletV5 extends HttpServlet {
         "handler adapter를 찾을 수 없습니다." + " handler = " + handler);
     }
 
-
     private String viewResolver(String viewName) {
         return "/WEB-INF/views/" + viewName + ".jsp";
     }
-
 }

@@ -1,5 +1,8 @@
 package hello.servlet.web.frontcontroller;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import javax.annotation.PreDestroy;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -8,7 +11,6 @@ import java.io.IOException;
 import java.util.Map;
 
 public class MyView {
-
     private String viewPath;
 
     public MyView(String viewPath) {
@@ -34,6 +36,5 @@ public class MyView {
     {
         model.forEach((key, value) -> request.setAttribute(key, value));
     }
-
 }
 
